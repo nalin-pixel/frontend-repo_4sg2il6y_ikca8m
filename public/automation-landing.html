@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Automation Services — Premium High-Tech Landing</title>
+  <meta name="description" content="Premium automation solutions that save time and boost revenue. Modern, high-converting landing page with elegant animations and lead capture." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Spline Web Component -->
+  <script type="module" src="https://unpkg.com/@splinetool/viewer@1.9.48/build/spline-viewer.js"></script>
+  <style>
+    :root{
+      --green-900:#024731; /* deep */
+      --green-800:#006039; /* primary */
+      --green-400:#8FBC8F; /* sage */
+      --gold-500:#D4AF37; /* primary gold */
+      --gold-400:#C9A961;
+      --text-dark:#1a1a1a;
+      --text-light:#ffffff;
+      --bg:#ffffff;
+      --shadow-soft:0 10px 30px rgba(0,0,0,.08);
+      --glass-bg:rgba(255,255,255,0.08);
+      --glass-border:rgba(255,255,255,0.18);
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--text-dark);
+      background:var(--bg);
+      scroll-behavior:smooth;
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .container{width:100%;max-width:1200px;margin:0 auto;padding:0 20px}
+
+    /* Animated gradient backdrop */
+    .gradient-bg{
+      position:fixed;inset:0;z-index:-1;pointer-events:none;
+      background: radial-gradient(1200px 800px at 80% -10%, rgba(212,175,55,0.12), transparent 50%),
+                  radial-gradient(900px 700px at -10% 10%, rgba(0,96,57,0.12), transparent 60%),
+                  radial-gradient(1000px 900px at 50% 120%, rgba(143,188,143,0.12), transparent 55%),
+                  linear-gradient(180deg, #ffffff 0%, #f7fbf9 100%);
+      filter: saturate(110%);
+      animation: hue 18s ease-in-out infinite alternate;
+    }
+    @keyframes hue{from{filter:hue-rotate(0deg) saturate(110%)}to{filter:hue-rotate(-8deg) saturate(120%)}}
+
+    /* Navbar */
+    .nav{
+      position:fixed;top:0;left:0;right:0;z-index:50;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,.55);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:72px}
+    .brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.2px;color:var(--green-900)}
+    .brand .logo{
+      width:36px;height:36px;border-radius:10px;
+      background: conic-gradient(from 180deg at 50% 50%, var(--gold-500), var(--green-800), var(--gold-400));
+      box-shadow: inset 0 0 10px rgba(255,255,255,.45), 0 6px 18px rgba(0,0,0,.12);
+    }
+    .nav-cta{
+      display:inline-flex;align-items:center;gap:10px;padding:12px 18px;border-radius:12px;
+      background:var(--green-800);color:var(--text-light);font-weight:600;
+      box-shadow:0 8px 18px rgba(0,96,57,.28), inset 0 0 0 1px rgba(255,255,255,.08);
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+    }
+    .nav-cta:hover{transform:translateY(-1px);background:#0b7a50;box-shadow:0 10px 24px rgba(0,96,57,.34)}
+
+    /* Hero */
+    .hero{position:relative;padding-top:96px}
+    .hero-wrap{position:relative;min-height:88vh;display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center}
+    .hero-content{position:relative;z-index:2}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;font-weight:600;color:var(--green-900);
+      background:rgba(0,96,57,.08);border:1px solid rgba(0,96,57,.14)}
+    h1{font-size:clamp(32px,4vw,56px);line-height:1.05;margin:16px 0 14px;color:var(--green-900)}
+    .subtitle{font-size:clamp(16px,1.6vw,20px);line-height:1.7;color:#2a2a2a;opacity:.88}
+    .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+    .btn-primary{
+      display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:14px;
+      color:#fff;font-weight:700;letter-spacing:.2px;
+      background: linear-gradient(180deg, #0a7f54 0%, var(--green-800) 100%);
+      box-shadow:0 12px 24px rgba(0,96,57,.28), 0 0 0 2px rgba(212,175,55,.0) inset;
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+    .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.06);box-shadow:0 16px 32px rgba(0,96,57,.34), 0 0 0 2px rgba(212,175,55,.45) inset}
+    .btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:14px 20px;border-radius:14px;font-weight:700;border:1px solid rgba(0,0,0,.12);background:rgba(255,255,255,.7);backdrop-filter:blur(8px)}
+
+    /* Trust bar */
+    .trust{margin-top:28px;display:flex;flex-wrap:wrap;gap:24px;align-items:center;opacity:.9}
+    .trust .logo{height:22px;filter:grayscale(100%) contrast(1.1) opacity(.85)}
+
+    /* Spline container */
+    .hero-visual{position:relative;min-height:60vh;height:64vh;border-radius:24px;overflow:hidden;box-shadow:var(--shadow-soft)}
+    .hero-visual spline-viewer{width:100%;height:100%;display:block}
+    .hero-overlay{
+      position:absolute;inset:0;pointer-events:none;
+      background: radial-gradient(60% 40% at 50% 100%, rgba(2,71,49,.0), rgba(2,71,49,.35) 85%),
+                  linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.06) 100%);
+    }
+
+    /* Particles */
+    #particles{position:absolute;inset:0;pointer-events:none}
+
+    /* Sections */
+    section{padding:80px 0}
+    .section-title{font-size:32px;color:var(--green-900);margin:0 0 14px}
+    .section-sub{color:#334;opacity:.8;margin-bottom:28px}
+
+    /* Problem / Solution */
+    .grid{display:grid;gap:22px}
+    .grid-3{grid-template-columns:repeat(3,1fr)}
+    .grid-2{grid-template-columns:repeat(2,1fr)}
+    .card{
+      position:relative;border-radius:18px;padding:22px;background: linear-gradient(180deg, rgba(255,255,255,.65), rgba(255,255,255,.5));
+      border:1px solid rgba(0,0,0,.06);backdrop-filter: blur(10px);box-shadow: var(--shadow-soft);
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .card:hover{transform:translateY(-4px);box-shadow:0 18px 40px rgba(0,0,0,.12);border-color:rgba(0,96,57,.2)}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(2,71,49,.08);color:var(--green-900);font-weight:600;border:1px solid rgba(2,71,49,.16)}
+
+    /* Timeline */
+    .timeline{position:relative;margin-top:10px}
+    .timeline:before{content:"";position:absolute;left:22px;top:0;bottom:0;width:2px;background:linear-gradient(180deg, var(--gold-500), rgba(212,175,55,0));opacity:.6}
+    .step{position:relative;margin-left:60px;margin-bottom:24px;padding:18px 18px;border-left:2px dashed rgba(0,0,0,.06);border-radius:12px;background:rgba(255,255,255,.65)}
+    .step .num{position:absolute;left:-54px;top:8px;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;color:#fff;font-weight:800;background:linear-gradient(180deg, var(--gold-400), var(--gold-500));box-shadow:0 8px 16px rgba(212,175,55,.28)}
+
+    /* Testimonials */
+    .quote{font-size:18px;line-height:1.7;color:#1e1e1e}
+    .avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(180deg, #eee, #ddd);border:2px solid #fff;box-shadow:0 6px 14px rgba(0,0,0,.08)}
+
+    /* Features grid */
+    .feature{
+      display:flex;gap:16px;align-items:flex-start;padding:18px;border-radius:16px;background:rgba(255,255,255,.6);border:1px solid rgba(0,0,0,.06);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .feature:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.12)}
+    .icon-pill{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:linear-gradient(180deg, rgba(0,96,57,.12), rgba(0,96,57,.2));color:var(--green-900);border:1px solid rgba(0,96,57,.24)}
+
+    /* FAQ */
+    .faq-item{border-bottom:1px solid rgba(0,0,0,.08);padding:16px 0}
+    .faq-q{display:flex;align-items:center;justify-content:space-between;cursor:pointer}
+    .faq-a{max-height:0;overflow:hidden;transition:max-height .3s ease}
+
+    /* Form */
+    .lead-form{display:grid;gap:14px}
+    .form-field{display:flex;flex-direction:column;gap:8px}
+    .form-field input{padding:14px 14px;border-radius:12px;border:1px solid rgba(0,0,0,.12);background:#fff;font-size:16px;outline:none;transition:border-color .2s ease, box-shadow .2s ease}
+    .form-field input:focus{border-color:var(--green-800);box-shadow:0 0 0 4px rgba(0,96,57,.12)}
+    .privacy{font-size:12px;color:#445;opacity:.8}
+    .submit{
+      display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px;border-radius:14px;border:none;
+      color:#fff;font-weight:800;letter-spacing:.3px;cursor:pointer;background: radial-gradient(120% 120% at 50% 0%, var(--gold-500), #b9932e 60%, var(--gold-400) 100%);
+      box-shadow:0 14px 28px rgba(212,175,55,.28), inset 0 0 0 1px rgba(255,255,255,.18);
+      transition: transform .18s ease, box-shadow .18s ease, filter .18s ease;
+    }
+    .submit:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 18px 36px rgba(212,175,55,.34), inset 0 0 0 1px rgba(255,255,255,.24)}
+    .submit:disabled{opacity:.7;cursor:not-allowed}
+
+    /* CTA footer */
+    .cta{
+      position:relative;border-radius:22px;overflow:hidden;padding:34px;background:linear-gradient(180deg, rgba(0,96,57,0.9), rgba(2,71,49,0.92));color:#fff;
+      box-shadow:0 18px 44px rgba(0,96,57,.28)
+    }
+    .cta::after{content:"";position:absolute;inset:-20%;background:radial-gradient(40% 30% at 70% 30%, rgba(212,175,55,.25), transparent 60%);filter:blur(20px)}
+
+    /* Reveal animation */
+    .reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+    .reveal.visible{opacity:1;transform:translateY(0)}
+
+    /* Parallax helpers */
+    .parallax{will-change:transform}
+
+    /* Responsive */
+    @media (max-width: 1024px){
+      .hero-wrap{grid-template-columns:1fr;min-height:auto}
+      .hero-visual{height:52vh}
+    }
+    @media (max-width: 768px){
+      .grid-3{grid-template-columns:1fr}
+      .grid-2{grid-template-columns:1fr}
+      .nav-inner{height:64px}
+      .hero-visual{height:46vh}
+      section{padding:64px 0}
+    }
+  </style>
+</head>
+<body>
+  <div class="gradient-bg"></div>
+  <nav class="nav">
+    <div class="container nav-inner">
+      <div class="brand">
+        <div class="logo"></div>
+        <span>Lux Automations</span>
+      </div>
+      <a href="#lead" class="nav-cta"><i data-lucide="sparkles"></i> Get a Proposal</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container hero-wrap">
+      <div class="hero-content">
+        <div class="eyebrow reveal"><i data-lucide="settings"></i> Enterprise-Grade Automation</div>
+        <h1 class="reveal" style="transition-delay:.08s">Save Time. Scale Faster. Grow Revenue.</h1>
+        <p class="subtitle reveal" style="transition-delay:.14s">We design premium automation systems that eliminate manual work, supercharge operations, and unlock new profit. From lead flow to fulfillment—make every process effortless.</p>
+        <div class="hero-ctas reveal" style="transition-delay:.2s">
+          <a class="btn-primary" href="#lead"><i data-lucide="rocket"></i> Start Your Automation Journey</a>
+          <a class="btn-ghost" href="#how"><i data-lucide="play"></i> See How It Works</a>
+        </div>
+        <div class="trust reveal" style="transition-delay:.28s">
+          <img class="logo" alt="Client" src="https://dummyimage.com/120x24/ffffff/000000&text=ACME"/>
+          <img class="logo" alt="Client" src="https://dummyimage.com/120x24/ffffff/000000&text=VANTIS"/>
+          <img class="logo" alt="Client" src="https://dummyimage.com/120x24/ffffff/000000&text=ZENIT"/>
+          <span style="font-weight:700;color:var(--green-900)">+2.3M hours automated</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal" style="transition-delay:.16s">
+        <spline-viewer style="width:100%;height:100%" url="https://prod.spline.design/LU2mWMPbF3Qi1Qxh/scene.splinecode"></spline-viewer>
+        <div class="hero-overlay"></div>
+        <canvas id="particles"></canvas>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Problem / Solution -->
+    <section id="problem" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="alert-triangle"></i> The Problem</div>
+        <h2 class="section-title">Manual processes slow you down</h2>
+        <p class="section-sub">Without automation, teams drown in repetitive tasks, leads slip through the cracks, and growth stalls.</p>
+        <div class="grid grid-3">
+          <div class="card">
+            <h3><i data-lucide="timer"></i> Time wasted on repetitive work</h3>
+            <p>Data entry, status updates, follow-ups—hours vanish every day on tasks that should run themselves.</p>
+          </div>
+          <div class="card">
+            <h3><i data-lucide="zap"></i> Missed revenue opportunities</h3>
+            <p>Slow responses and inconsistent workflows cost deals and damage customer experience.</p>
+          </div>
+          <div class="card">
+            <h3><i data-lucide="shield-x"></i> Human error and inconsistency</h3>
+            <p>Manual handling leads to mistakes, compliance risks, and unpredictable outcomes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Benefits -->
+    <section id="benefits" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="sparkles"></i> Benefits</div>
+        <h2 class="section-title">What automation unlocks</h2>
+        <div class="grid grid-3">
+          <div class="feature">
+            <div class="icon-pill"><i data-lucide="line-chart"></i></div>
+            <div>
+              <h4>Revenue Acceleration</h4>
+              <p>Respond instantly, route leads smartly, and close faster with AI-assisted workflows.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="icon-pill"><i data-lucide="cpu"></i></div>
+            <div>
+              <h4>Operational Efficiency</h4>
+              <p>Automate up to 80% of repetitive tasks and free your team for high-impact work.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="icon-pill"><i data-lucide="shield"></i></div>
+            <div>
+              <h4>Consistency & Compliance</h4>
+              <p>Reduce errors, standardize execution, and maintain clear audit trails.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="icon-pill"><i data-lucide="infinity"></i></div>
+            <div>
+              <h4>Scalable Systems</h4>
+              <p>Build foundations that scale with your pipeline, not against it.</p>
+            </div>
+          </div>
+          <div class="feature">
+            <div class="icon-pill"><i data-lucide="wallet"></i></div>
+            <div>
+              <h4>Lower Costs</h4>
+              <p>Cut tool sprawl and manual overhead with unified, automated processes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead Capture -->
+    <section id="lead" class="reveal">
+      <div class="container">
+        <div class="grid grid-2">
+          <div>
+            <div class="badge"><i data-lucide="send"></i> Start Your Automation Journey</div>
+            <h2 class="section-title">Get a tailored automation plan</h2>
+            <p class="section-sub">Share your details and we’ll map the top 3 automations to save time and drive growth in the next 30 days.</p>
+            <ul style="margin:10px 0 0;padding-left:18px;color:#233;opacity:.9;line-height:1.8">
+              <li>Free 30‑minute consult</li>
+              <li>Custom ROI projection</li>
+              <li>Timeline & tool recommendations</li>
+            </ul>
+          </div>
+          <div class="card">
+            <form class="lead-form" id="leadForm" novalidate>
+              <div class="form-field">
+                <label for="name">Full Name</label>
+                <input id="name" name="name" type="text" placeholder="Jane Doe" required />
+                <small class="error" id="err-name" style="color:#b94d4d;display:none">Please enter your full name.</small>
+              </div>
+              <div class="form-field">
+                <label for="phone">Phone Number</label>
+                <input id="phone" name="phone" type="tel" placeholder="(555) 123-4567" required />
+                <small class="error" id="err-phone" style="color:#b94d4d;display:none">Please enter a valid phone number.</small>
+              </div>
+              <div class="form-field">
+                <label for="email">Email</label>
+                <input id="email" name="email" type="email" placeholder="you@company.com" required />
+                <small class="error" id="err-email" style="color:#b94d4d;display:none">Please enter a valid email address.</small>
+              </div>
+              <button class="submit" id="submitBtn" type="submit"><i data-lucide="sparkle"></i> Request My Plan</button>
+              <p class="privacy"><i data-lucide="shield-check" style="width:14px;height:14px;vertical-align:-2px"></i> We respect your privacy. No spam. Unsubscribe anytime.</p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How it works -->
+    <section id="how" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="workflow"></i> Process</div>
+        <h2 class="section-title">How it works</h2>
+        <div class="timeline">
+          <div class="step">
+            <div class="num">1</div>
+            <h4>Discovery & Audit</h4>
+            <p>We map your current workflows and identify high‑leverage automation opportunities.</p>
+          </div>
+          <div class="step">
+            <div class="num">2</div>
+            <h4>Design & Architecture</h4>
+            <p>We architect systems with best‑in‑class tools, data flows, and governance.</p>
+          </div>
+          <div class="step">
+            <div class="num">3</div>
+            <h4>Implementation</h4>
+            <p>We build, test, and integrate automations across your stack with minimal disruption.</p>
+          </div>
+          <div class="step">
+            <div class="num">4</div>
+            <h4>Scale & Support</h4>
+            <p>We monitor performance, optimize continuously, and scale as you grow.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social Proof -->
+    <section id="proof" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="trophy"></i> Results</div>
+        <h2 class="section-title">Trusted by ambitious teams</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <div style="font-weight:800;color:var(--green-900);font-size:28px">+48%</div>
+            <div class="quote">Increase in qualified pipeline within 60 days by automating lead routing and follow‑up.</div>
+          </div>
+          <div class="card">
+            <div style="font-weight:800;color:var(--green-900);font-size:28px">-72%</div>
+            <div class="quote">Reduction in manual ops workload after unifying 14 tools and automating reporting.</div>
+          </div>
+          <div class="card">
+            <div style="font-weight:800;color:var(--green-900);font-size:28px">3.4x</div>
+            <div class="quote">Average ROI in the first quarter from lifecycle and fulfillment automations.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Showcase -->
+    <section id="features" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="packages"></i> Capabilities</div>
+        <h2 class="section-title">What we automate</h2>
+        <div class="grid grid-3">
+          <div class="card">
+            <h4><i data-lucide="messages-square"></i> Lead Capture & Nurture</h4>
+            <p>Multi‑channel capture, scoring, and AI messaging that converts faster.</p>
+          </div>
+          <div class="card">
+            <h4><i data-lucide="kanban-square"></i> Sales Ops</h4>
+            <p>Pipeline hygiene, enrichment, tasking, and handoffs with zero busywork.</p>
+          </div>
+          <div class="card">
+            <h4><i data-lucide="warehouse"></i> Fulfillment</h4>
+            <p>Order processing, provisioning, and onboarding across tools and teams.</p>
+          </div>
+          <div class="card">
+            <h4><i data-lucide="bar-chart-4"></i> Reporting</h4>
+            <p>Live dashboards, anomaly alerts, and automated executive summaries.</p>
+          </div>
+          <div class="card">
+            <h4><i data-lucide="bot"></i> AI Assistants</h4>
+            <p>Copilots for support, sales, and internal ops trained on your data.</p>
+          </div>
+          <div class="card">
+            <h4><i data-lucide="lock"></i> Governance</h4>
+            <p>Access, approvals, and audit trails—secure, compliant, and consistent.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="reveal">
+      <div class="container">
+        <div class="badge"><i data-lucide="help-circle"></i> FAQ</div>
+        <div class="grid grid-2">
+          <div class="faq-item">
+            <div class="faq-q"><h4>How fast can we get started?</h4><i data-lucide="chevron-down"></i></div>
+            <div class="faq-a"><p>Discovery calls are available within 48 hours. Typical implementations start within 1–2 weeks.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><h4>Which tools do you support?</h4><i data-lucide="chevron-down"></i></div>
+            <div class="faq-a"><p>We integrate with CRMs, helpdesks, data warehouses, iPaaS, and custom APIs—Salesforce, HubSpot, Slack, Notion, Zapier/Make, and more.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><h4>Will this work for my size of company?</h4><i data-lucide="chevron-down"></i></div>
+            <div class="faq-a"><p>Yes. We tailor solutions for startups to enterprise, with architectures that scale as you grow.</p></div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-q"><h4>What ROI should we expect?</h4><i data-lucide="chevron-down"></i></div>
+            <div class="faq-a"><p>Most clients see 2–5x ROI in the first quarter through time savings and increased conversion.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="reveal">
+      <div class="container">
+        <div class="cta">
+          <div style="position:relative;z-index:1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px">
+            <div>
+              <div class="badge" style="background:rgba(255,255,255,.15);color:#fff;border-color:rgba(255,255,255,.28)"><i data-lucide="alarm-clock"></i> Limited Slots</div>
+              <h2 style="margin:10px 0 6px">Ready to automate your next 1000 hours?</h2>
+              <p style="opacity:.92;margin:0">Book a consult now—new onboarding opens weekly.</p>
+            </div>
+            <a class="btn-primary" href="#lead" style="background:linear-gradient(180deg, #0f8b5e, var(--green-800));box-shadow:0 14px 28px rgba(0,96,57,.34)"><i data-lucide="calendar"></i> Book My Slot</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer style="padding:40px 0;text-align:center;color:#334;opacity:.8">
+    <div class="container">
+      © <span id="year"></span> Lux Automations. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // IntersectionObserver for reveal animations
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      })
+    },{threshold:.14});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+    // Simple parallax on scroll for elements with .parallax (add as needed)
+    const parallaxEls = [];
+    window.addEventListener('scroll', ()=>{
+      const y = window.scrollY;
+      parallaxEls.forEach(({el, speed})=>{
+        el.style.transform = `translateY(${y*speed}px)`;
+      });
+    });
+
+    // Floating particles in hero canvas
+    const canvas = document.getElementById('particles');
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    function resize(){
+      canvas.width = canvas.parentElement.clientWidth;
+      canvas.height = canvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resize); resize();
+    function initParticles(){
+      particles = Array.from({length: 60}, ()=>({
+        x: Math.random()*canvas.width,
+        y: Math.random()*canvas.height,
+        r: Math.random()*2+0.5,
+        vx: (Math.random()-.5)*0.3,
+        vy: (Math.random()-.5)*0.3,
+        g: Math.random()>.5
+      }))
+    }
+    initParticles();
+    function tick(){
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      for(const p of particles){
+        p.x+=p.vx; p.y+=p.vy;
+        if(p.x<0||p.x>canvas.width) p.vx*=-1;
+        if(p.y<0||p.y>canvas.height) p.vy*=-1;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle = p.g ? 'rgba(212,175,55,.6)' : 'rgba(0,96,57,.5)';
+        ctx.shadowColor = p.g ? 'rgba(212,175,55,.45)' : 'rgba(0,96,57,.35)';
+        ctx.shadowBlur = 8;
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item').forEach(item=>{
+      const q = item.querySelector('.faq-q');
+      const a = item.querySelector('.faq-a');
+      q.addEventListener('click',()=>{
+        const open = a.style.maxHeight && a.style.maxHeight !== '0px';
+        document.querySelectorAll('.faq-a').forEach(el=>el.style.maxHeight = null);
+        if(!open){ a.style.maxHeight = a.scrollHeight + 'px'; }
+      });
+    });
+
+    // Form validation
+    const form = document.getElementById('leadForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const nameEl = document.getElementById('name');
+    const phoneEl = document.getElementById('phone');
+    const emailEl = document.getElementById('email');
+    const show = (id, visible)=>{document.getElementById(id).style.display = visible ? 'block':'none'}
+
+    function validPhone(v){
+      return /^(\+?[0-9\s\-()]{7,})$/.test(v.trim());
+    }
+    function validEmail(v){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    }
+
+    form.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      let ok = true;
+      if(!nameEl.value.trim()){ ok=false; show('err-name', true)} else show('err-name', false);
+      if(!validPhone(phoneEl.value)){ ok=false; show('err-phone', true)} else show('err-phone', false);
+      if(!validEmail(emailEl.value)){ ok=false; show('err-email', true)} else show('err-email', false);
+      if(!ok) return;
+
+      submitBtn.disabled = true; submitBtn.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Submitting...'; lucide.createIcons();
+      // Simulate async submit
+      await new Promise(r=>setTimeout(r, 1000));
+      submitBtn.innerHTML = '<i data-lucide="check-circle-2"></i> Request Received'; lucide.createIcons();
+      form.reset();
+    });
+
+    // Small utility: icon spinner
+    const style = document.createElement('style');
+    style.textContent = `.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}`;
+    document.head.appendChild(style);
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
